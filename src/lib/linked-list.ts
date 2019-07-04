@@ -12,19 +12,20 @@ export class LinkedList<V> {
     public tail: LinkedListEntryRef<V>
     private _size: number
 
-    constructor() {
+    constructor(iterable?: Iterable<V>) {
         this.head = null
         this.tail = null
         this._size = 0
+        if (iterable) {
+            this.addLast(...iterable)
+        }
     }
 
     addFirst(...values: V[]) {
         for (let i = values.length - 1; i >= 0; i--) {
             const newEntry = new LinkedListEntry(values[i])
             if (this.head == null) {
-                if (this.tail == null) {
-                    this.head = this.tail = newEntry
-                }
+                this.head = this.tail = newEntry
             } else {
                 newEntry.next = this.head
                 this.head.prev = newEntry
@@ -38,9 +39,7 @@ export class LinkedList<V> {
         values.forEach(value => {
             const newEntry = new LinkedListEntry(value)
             if (this.tail == null) {
-                if (this.head == null) {
-                    this.head = this.tail = newEntry
-                }
+                this.head = this.tail = newEntry
             } else {
                 newEntry.prev = this.tail
                 this.tail.next = newEntry
@@ -49,7 +48,7 @@ export class LinkedList<V> {
             ++this._size
         })
     }
-
+    
     removeFirst(): V | null {
         if (!this.head) return null
         const entry = this.head
@@ -77,16 +76,13 @@ export class LinkedList<V> {
     }
 
     remove(index: number): V | null {
-        const entry = this.getEntry(index)
-        if (!entry) return null
-        if (this.head == this.tail && this.head == entry) {
-            this.head = this.tail = null
-            return entry.value
-        } else if (this.head == entry) {
+        if (index == 0) {
             return this.removeFirst()
-        } else if (this.tail == entry) {
+        } else if (index == this._size - 1) {
             return this.removeLast()
         } else {
+            const entry = this.getEntry(index)
+            if (!entry) return null
             if (entry.prev) {
                 entry.prev.next = entry.next
             }
@@ -103,7 +99,7 @@ export class LinkedList<V> {
     }
 
     getLast(): V | null {
-        return this.get(this._size)
+        return this.get(this._size - 1)
     }
 
     get(index: number): V | null {
@@ -112,16 +108,12 @@ export class LinkedList<V> {
     }
 
     private getEntry(index: number): LinkedListEntryRef<V> {
-        if (this.head == null || this._size - 1 < index) return null
+        if (this.head == null || index < 0 || this._size - 1 < index) return null
         let i = 0
-        let entry = this.head
-        while (i < index) {
-            if (entry.next) {
-                entry = entry.next
-                ++i
-            } else {
-                return null
-            }
+        let entry: LinkedListEntryRef<V> = this.head
+        while (entry && i < index) {
+            entry = entry.next
+            ++i
         }
         return entry
     }
