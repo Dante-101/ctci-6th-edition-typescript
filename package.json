@@ -1,0 +1,31 @@
+{
+  "name": "ctci-6th-edition-typescript",
+  "version": "1.0.0",
+  "description": "Cracking the Coding Interview - 6th Edition - Typescript Solutions",
+  "scripts": {
+    "test": "nyc mocha",
+    "clean": "rimraf coverage .nyc_output"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dante-101/ctci-6th-edition-typescript.git"
+  },
+  "author": "Gaurav Lahoti",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dante-101/ctci-6th-edition-typescript/issues"
+  },
+  "homepage": "https://github.com/Dante-101/ctci-6th-edition-typescript#readme",
+  "devDependencies": {
+    "@types/chai": "4.1.7",
+    "@types/mocha": "5.2.7",
+    "chai": "4.2.0",
+    "mocha": "6.1.4",
+    "nyc": "14.1.1",
+    "rimraf": "2.6.3",
+    "source-map-support": "0.5.12",
+    "ts-node": "8.3.0",
+    "tslint": "5.18.0",
+    "typescript": "3.5.2"
+  }
+}
