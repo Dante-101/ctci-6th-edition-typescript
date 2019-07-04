@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Cracking the Coding Interview - 6th Edition - Typescript Solutions",
   "scripts": {
-    "test": "nyc mocha",
+    "test": "nyc mocha --opts ./mocha.opts",
     "clean": "rimraf coverage .nyc_output"
   },
   "repository": {
