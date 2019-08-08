@@ -72,7 +72,6 @@ describe("graph search", () => {
             return nodes
         }
         
-
         it("breadth first search", () => {
             const nodes1 = getNodes()
             expect(bfs(nodes1[1], nodes1[0].value)).to.be.true
